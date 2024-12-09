@@ -8,6 +8,8 @@ function calculate() {
   }
 }
 
-function add(numbers) {
-
+const add = (numbers) => {
+  if(numbers === '') return 0
 }
+
+module.exports = {add};
