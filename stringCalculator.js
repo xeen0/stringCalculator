@@ -8,6 +8,16 @@ function calculate() {
   }
 }
 
+window.onload = function() {
+  const inputField = document.getElementById("inputBox");
+  inputField.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      calculate(); 
+    }
+  });
+}
+
 const add = (numbers) => {
   if (numbers === "") return 0;
 
