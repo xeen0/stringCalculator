@@ -11,8 +11,8 @@ function calculate() {
 const add = (numbers) => {
   if(numbers === '') return 0
 
-  const num = parseInt(numbers)
-  return num
+  const nums = numbers.split(',').map(n => parseInt((n)))
+  return nums.reduce((x,y) => x+y, 0)
 }
 
 module.exports = {add};
