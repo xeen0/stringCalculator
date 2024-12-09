@@ -10,6 +10,9 @@ function calculate() {
 
 const add = (numbers) => {
   if(numbers === '') return 0
+
+  const num = parseInt(numbers)
+  return num
 }
 
 module.exports = {add};
