@@ -11,9 +11,16 @@ function calculate() {
 const add = (numbers) => {
   if (numbers === "") return 0;
 
+  let delimiter = ","
+
+  if (numbers.startsWith('//')) {
+    const delimiterLineEndIndex = numbers.indexOf('\n');
+    delimiter = numbers.slice(2, delimiterLineEndIndex);
+    numbers = numbers.slice(delimiterLineEndIndex + 1);
+  }
   const nums = numbers
     .replace(/\n/g, ",")
-    .split(",")
+    .split(delimiter)
     .map((n) => (n != "" ? parseInt(n) : 0));
   return nums.reduce((x, y) => x + y, 0);
 };
