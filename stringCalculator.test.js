@@ -40,4 +40,7 @@ describe("String Calculator", () => {
   test('should allow multiple delimiters', () => {
     expect(add('//[*][%]\n1*2%3')).toBe(6);
   })
+  test('should allow multi-character multiple delimiters', () => {
+    expect(add('//[**][%%]\n1**2%%3')).toBe(6);
+  })
 });

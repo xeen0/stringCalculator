@@ -1,3 +1,4 @@
+var totalCount = 0
 function calculate() {
   const input = document.getElementById("inputBox").value;
   try {
@@ -9,6 +10,7 @@ function calculate() {
 }
 
 window.onload = function() {
+  totalCount = 0
   const inputField = document.getElementById("inputBox");
   inputField.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
@@ -19,6 +21,7 @@ window.onload = function() {
 }
 
 const add = (numbers) => {
+  totalCount++
   if (numbers === "") return 0;
 
   let delimitersRegex = ","
@@ -39,8 +42,14 @@ const add = (numbers) => {
   const nums = numbers
     .replace(/\n/g, ",")
     .split(delimitersRegex)
-    .map((n) => isNaN(parseInt(n)) ? 0 : parseInt(n)>1000 ? 0 : parseInt(n));
+    .map((n) => {
+      const num = parseInt(n);
+      return isNaN(num) || num > 1000 ? 0 : num;
+    })
   return nums.reduce((x, y) => x + y, 0);
 };
 
+const getCalledCount = () => {
+  document.getElementById("count").textContent = "Total Count: " + totalCount;
+}
 module.exports = { add };
