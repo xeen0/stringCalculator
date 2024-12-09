@@ -21,22 +21,24 @@ window.onload = function() {
 const add = (numbers) => {
   if (numbers === "") return 0;
 
-  let delimiter = ","
+  let delimitersRegex = ","
   numbers = numbers.replace(/\\n/g, '\n');
 
   const negativeNumbers = numbers.match(/-\d+/g);
   if (negativeNumbers) {
     throw new Error('negative numbers not allowed: ' + negativeNumbers.join(', '));
   }
-
   if (numbers.startsWith('//')) {
     const delimiterLineEndIndex = numbers.indexOf('\n');
-    delimiter = numbers.slice(2, delimiterLineEndIndex);
+    let delimiters = numbers.slice(2, delimiterLineEndIndex);
+    let delimitersArray = delimiters.match(/\[(.*?)\]/g).map(d => d.slice(1, -1));
+    const escapedDelimiters = delimitersArray.map(d => d.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&'));
+    delimitersRegex = new RegExp(escapedDelimiters.join('|'), 'g');
     numbers = numbers.slice(delimiterLineEndIndex + 1);
   }
   const nums = numbers
     .replace(/\n/g, ",")
-    .split(delimiter)
+    .split(delimitersRegex)
     .map((n) => isNaN(parseInt(n)) ? 0 : parseInt(n)>1000 ? 0 : parseInt(n));
   return nums.reduce((x, y) => x + y, 0);
 };
