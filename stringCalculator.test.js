@@ -17,6 +17,10 @@ describe("String Calculator", () => {
     expect(add("1,5,,7,5,1,,3")).toBe(22);
   });
 
+  test("should return the sum of numbers", () => {
+    expect(add("1,5,,7,5,1,,3-,d,-d,")).toBe(22);
+  });
+
   test("should handle new lines between numbers", () => {
     expect(add("1\n2,3")).toBe(6);
   });

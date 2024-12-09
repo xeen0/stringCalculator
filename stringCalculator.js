@@ -27,7 +27,7 @@ const add = (numbers) => {
   const nums = numbers
     .replace(/\n/g, ",")
     .split(delimiter)
-    .map((n) => (n != "" ? parseInt(n) : 0));
+    .map((n) => isNaN(parseInt(n)) ? 0 : parseInt(n));
   return nums.reduce((x, y) => x + y, 0);
 };
 
