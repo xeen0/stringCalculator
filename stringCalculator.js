@@ -12,6 +12,12 @@ const add = (numbers) => {
   if (numbers === "") return 0;
 
   let delimiter = ","
+  numbers = numbers.replace(/\\n/g, '\n');
+
+  const negativeNumbers = numbers.match(/-\d+/g);
+  if (negativeNumbers) {
+    throw new Error('negative numbers not allowed: ' + negativeNumbers.join(', '));
+  }
 
   if (numbers.startsWith('//')) {
     const delimiterLineEndIndex = numbers.indexOf('\n');
